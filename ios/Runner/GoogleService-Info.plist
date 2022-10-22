@@ -4,6 +4,10 @@
 <dict>
 	<key>CLIENT_ID</key>
 	<string>308815498241-3f87r7ljug8drviu55qg3n575qnumc1i.apps.googleusercontent.com</string>
+	<key></key>
+	<string></string>
+	<key>CFBundleExecutable</key>
+	<string></string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.308815498241-3f87r7ljug8drviu55qg3n575qnumc1i</string>
 	<key>API_KEY</key>
@@ -19,16 +23,18 @@
 	<key>STORAGE_BUCKET</key>
 	<string>chatapps3-af7a5.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:308815498241:ios:0f5a4dfe8213383074c400</string>
+	<key>CFBundleIdentifier</key>
+	<string></string>
 </dict>
 </plist>

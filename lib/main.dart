@@ -1,8 +1,10 @@
 
-import 'package:chat_apps3/page/welcome.dart';
+
+import 'package:chat_apps3/pagelogin/fontpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,11 +14,16 @@ void main() async {
 class ChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor:Colors.indigo,
-      ),
-      home: WelcomePage(),
-    );
+    return
+      ScreenUtilInit(
+        builder: (BuildContext context, Widget? child) =>
+            MaterialApp(debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                primaryColor: Colors.indigo,
+              ),
+              home: FrontPage(),
+            ),
+        designSize: const Size(390, 844),
+      );
   }
 }

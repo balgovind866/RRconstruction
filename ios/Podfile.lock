@@ -751,6 +751,10 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
+  - phone_number (1.0.0):
+    - Flutter
+    - PhoneNumberKit/PhoneNumberKitCore (= 3.3.4)
+  - PhoneNumberKit/PhoneNumberKitCore (3.3.4)
   - PromisesObjC (2.1.1)
 
 DEPENDENCIES:
@@ -759,6 +763,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
+  - phone_number (from `.symlinks/plugins/phone_number/ios`)
 
 SPEC REPOS:
   trunk:
@@ -781,6 +786,7 @@ SPEC REPOS:
     - leveldb-library
     - Libuv-gRPC
     - nanopb
+    - PhoneNumberKit
     - PromisesObjC
 
 EXTERNAL SOURCES:
@@ -794,6 +800,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   google_sign_in_ios:
     :path: ".symlinks/plugins/google_sign_in_ios/ios"
+  phone_number:
+    :path: ".symlinks/plugins/phone_number/ios"
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
@@ -820,6 +828,8 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  phone_number: ad6f917e4fd2e507a198b93dca5eadcb463ec8c2
+  PhoneNumberKit: 441e8b26ec88d598e3591de9061eff18f5dd12e8
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
