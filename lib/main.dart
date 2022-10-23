@@ -1,6 +1,7 @@
 
 
 import 'package:chat_apps3/pagelogin/fontpage.dart';
+import 'package:chat_apps3/signpage/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
