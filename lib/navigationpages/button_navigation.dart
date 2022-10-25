@@ -33,6 +33,7 @@ class _ButtonNavigationState extends State<ButtonNavigation> {
     return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+
         onTap: onTap,
         currentIndex: currentIndex,
         backgroundColor: Color(0xff2C2929),
@@ -40,6 +41,8 @@ class _ButtonNavigationState extends State<ButtonNavigation> {
         showUnselectedLabels: false,
         selectedItemColor: Color(0xff48D1EF),
         unselectedItemColor: Colors.white,
+        selectedFontSize: 16,
+
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home),
             label: 'Home',
