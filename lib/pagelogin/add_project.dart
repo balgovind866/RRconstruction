@@ -1,10 +1,15 @@
 import 'dart:io';
 
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as path;
 
 class ProjectAdd extends StatefulWidget {
   const ProjectAdd({Key? key}) : super(key: key);
@@ -22,29 +27,128 @@ class _ProjectAddState extends State<ProjectAdd> {
   int? Quantity = 0;
   String? product_name = '';
   String? description = '';
+  List<String> catag=[
+    'catagory',
+    'men',
+    'woman',
+    'shoes',
+    'bags',
 
-  void uploadproduct() {
-    if (_formkey.currentState!.validate()) {
-      _formkey.currentState?.save();
-      print('valid all requerment');
-      print(price);
-      print(Quantity);
-      print(product_name);
-      print(description);
-    } else {
-      _scafoldkey.currentState?.showSnackBar(SnackBar(
-        content: Text(
-          'fill all the requarment ',
-          style: TextStyle(color: Colors.black),
-        ),
-        duration: Duration(seconds: 3),
-        backgroundColor: Colors.yellow,
-      ));
+  ];
+  List<String> catagMan=[
+    'subcategory',
+    'shrit',
+    'jacket',
+    'jeans',
+    'pant',
+
+  ];
+  List<String> catagWoman=[
+    'subcategory',
+    'w shrit',
+    'w jacket',
+    'w jeans',
+    'w pant',
+
+  ];
+  List<String> catagshoes=[
+    'subcategory',
+    's shrit',
+    's jacket',
+    's jeans',
+    's pant',
+
+  ];
+  List<String> catagbags=[
+    'subcategory',
+    'b shrit',
+    'b jacket',
+    'b jeans',
+    'b pant',
+
+  ];
+  String? maincatagValue='catagory';
+  String? mainsubvalue='subcategory';
+  List<String> subCategList=[];
+  Future<void> uploadImage() async {
+    try{
+      if (_formkey.currentState!.validate()) {
+        _formkey.currentState?.save();
+        if(imagesFileList!.isNotEmpty)
+        {
+          for(var image in imagesFileList!){
+            firebase_storage.Reference ref=firebase_storage
+                .FirebaseStorage.instance.ref('products/${path.basename(image.path)}');
+            await ref.putFile(File(image.path)).whenComplete(()async{
+              await ref.getDownloadURL().then((value){
+                imagesUrlList?.add(value);
+              });
+
+            });
+
+          }
+        }
+        print('valid all requerment');
+        print(price);
+        print(Quantity);
+        print(product_name);
+        print(description);
+      } else {
+        _scafoldkey.currentState?.showSnackBar(SnackBar(
+          content: Text(
+            'fill all the requarment ',
+            style: TextStyle(color: Colors.black),
+          ),
+          duration: Duration(seconds: 3),
+          backgroundColor: Colors.yellow,
+        ));
+      }
+    }catch(e){print(e);}
+
+
+  }
+  Future<void> uploaddata() async {
+    if(imagesUrlList!.isNotEmpty){
+      CollectionReference productRef=FirebaseFirestore.instance.collection('products');
+      await productRef.doc().set({
+        'maincatag':maincatagValue,
+        'subcateg':mainsubvalue,
+        'price':price,
+        'instock':Quantity,
+        'proname': product_name,
+        'prodesc':description,
+        'sid':FirebaseAuth.instance.currentUser!.uid,
+
+        'proimages':imagesUrlList,
+        'discount':0,
+
+      }).whenComplete(() {
+        setState(() {
+          imagesFileList=[];
+          maincatagValue='catagory';
+          subCategList=[];
+          imagesUrlList=[];
+        });
+
+      }
+        );
+
+
+    }else{
+      print('no images ');
     }
+  }
+
+
+
+  Future<void> uploadproduct() async {
+      await uploadImage().whenComplete(() => uploaddata());
+
   }
 
   final ImagePicker _picker = ImagePicker();
   List<XFile>? imagesFileList = [];
+  List<String>? imagesUrlList=[];
   dynamic _pickedImageError;
 
   void pickProductImages() async {
@@ -83,6 +187,7 @@ class _ProjectAddState extends State<ProjectAdd> {
 
   @override
   Widget build(BuildContext context) {
+    var size= MediaQuery.of(context).size;
     return ScaffoldMessenger(
       key: _scafoldkey,
       child: Scaffold(
@@ -115,6 +220,79 @@ class _ProjectAddState extends State<ProjectAdd> {
                         ),
 
                       ]),
+                      SizedBox(
+                        height: size.width * 0.5,
+                        width: size.width * 0.5,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Column(children: [Text('* select Maincatagory',style: TextStyle(color: Colors.red)),
+                              DropdownButton(
+                                  iconSize: 50.sp,
+                                  iconEnabledColor: Colors.red,
+
+                                  dropdownColor: Colors.yellow,
+                                  menuMaxHeight: 500,
+
+                                  value: maincatagValue,
+                                  items: catag.map<DropdownMenuItem<String>>((value){
+                                    return DropdownMenuItem(child: Text(value),
+                                      value: value,
+                                    );
+                                  }).toList(), onChanged: (String? value){
+                                if(value=='men')
+                                {
+                                  subCategList=catagMan;
+                                }else if(value=='woman')
+                                {
+                                  subCategList=catagWoman;
+                                }
+                                else if(value=='shoes')
+                                {
+                                  subCategList=catagshoes;
+                                }
+                                else if(value=='bags')
+                                {
+                                  subCategList=catagbags;
+                                }
+                                print(value);
+                                setState(() {
+                                  this.maincatagValue=value;
+                                  mainsubvalue='subcategory';
+                                });
+
+                              }),
+                            ]),
+
+                            Column(
+                                children:[
+                                  Text('* select subcatagory',style: TextStyle(color: Colors.red),),
+
+                                  DropdownButton(
+                                      iconSize: 40.sp,
+                                      iconEnabledColor: Colors.red,
+                                      dropdownColor: Colors.yellow,
+                                      menuMaxHeight: 500,
+                                      disabledHint: Text('subcategory'),
+                                      value:mainsubvalue ,
+                                      items:  subCategList.map<DropdownMenuItem<String>>((value){
+                                        return DropdownMenuItem(child: Text(value),
+                                          value: value,
+                                        );
+                                      }).toList(), onChanged: (String? Value){
+                                    print(Value);
+                                    setState(() {
+                                      mainsubvalue=Value;
+                                    });
+
+                                  }),
+                                ]),
+
+                          ],
+
+                        ),
+                      ),
+
                     ],
                   ),
                   Padding(
@@ -258,6 +436,7 @@ class _ProjectAddState extends State<ProjectAdd> {
     );
   }
 }
+
 
 var textFormDecoration = InputDecoration(
   labelText: 'price',
