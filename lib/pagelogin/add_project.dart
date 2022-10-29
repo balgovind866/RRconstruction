@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 
@@ -10,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
+import 'package:uuid/uuid.dart';
 
 class ProjectAdd extends StatefulWidget {
   const ProjectAdd({Key? key}) : super(key: key);
@@ -27,6 +29,8 @@ class _ProjectAddState extends State<ProjectAdd> {
   int? Quantity = 0;
   String? product_name = '';
   String? description = '';
+  String? produuid;
+  bool prograces=false;
   List<String> catag=[
     'catagory',
     'men',
@@ -73,9 +77,12 @@ class _ProjectAddState extends State<ProjectAdd> {
   Future<void> uploadImage() async {
     try{
       if (_formkey.currentState!.validate()) {
+
         _formkey.currentState?.save();
-        if(imagesFileList!.isNotEmpty)
-        {
+        setState(() {
+          prograces=true;
+        });
+
           for(var image in imagesFileList!){
             firebase_storage.Reference ref=firebase_storage
                 .FirebaseStorage.instance.ref('products/${path.basename(image.path)}');
@@ -87,7 +94,7 @@ class _ProjectAddState extends State<ProjectAdd> {
             });
 
           }
-        }
+
         print('valid all requerment');
         print(price);
         print(Quantity);
@@ -108,9 +115,11 @@ class _ProjectAddState extends State<ProjectAdd> {
 
   }
   Future<void> uploaddata() async {
-    if(imagesUrlList!.isNotEmpty){
+
+      produuid= const Uuid().v4();
       CollectionReference productRef=FirebaseFirestore.instance.collection('products');
-      await productRef.doc().set({
+      await productRef.doc(produuid).set({
+        'proId':produuid,
         'maincatag':maincatagValue,
         'subcateg':mainsubvalue,
         'price':price,
@@ -124,19 +133,27 @@ class _ProjectAddState extends State<ProjectAdd> {
 
       }).whenComplete(() {
         setState(() {
+          prograces=false;
           imagesFileList=[];
           maincatagValue='catagory';
           subCategList=[];
           imagesUrlList=[];
         });
-
+        _formkey.currentState?.reset();
+        _scafoldkey.currentState?.showSnackBar(SnackBar(
+          content: Text(
+            'your form is sucessfully submit ',
+            style: TextStyle(color: Colors.black),
+          ),
+          duration: Duration(seconds: 8),
+          backgroundColor: Colors.yellow,
+        ));
       }
+
         );
 
 
-    }else{
-      print('no images ');
-    }
+
   }
 
 
@@ -411,6 +428,7 @@ class _ProjectAddState extends State<ProjectAdd> {
                         });
                       },
                 backgroundColor: Colors.yellow,
+
                 child: imagesFileList!.isEmpty
                     ? Icon(
                         Icons.photo_library,
@@ -423,9 +441,12 @@ class _ProjectAddState extends State<ProjectAdd> {
               ),
             ),
             FloatingActionButton(
-              onPressed: uploadproduct,
+              onPressed:  uploadproduct,
               backgroundColor: Colors.yellow,
-              child: Icon(
+              child:prograces==true? CircularProgressIndicator(
+                color: Colors.black,
+              )
+              : Icon(
                 Icons.upload,
                 color: Colors.black,
               ),

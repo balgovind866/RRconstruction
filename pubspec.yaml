@@ -39,6 +39,7 @@ dependencies:
   phone_number: ^1.0.0
   image_picker_ios: ^0.8.6+1
   firebase_storage: ^10.3.5
+  uuid: ^3.0.6
 
 
 
