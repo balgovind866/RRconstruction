@@ -1,8 +1,4 @@
-
 import 'dart:io';
-
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -74,6 +70,8 @@ class _ProjectAddState extends State<ProjectAdd> {
   String? maincatagValue='catagory';
   String? mainsubvalue='subcategory';
   List<String> subCategList=[];
+
+
   Future<void> uploadImage() async {
     try{
       if (_formkey.currentState!.validate()) {
@@ -119,18 +117,19 @@ class _ProjectAddState extends State<ProjectAdd> {
       produuid= const Uuid().v4();
       CollectionReference productRef=FirebaseFirestore.instance.collection('products');
       await productRef.doc(produuid).set({
-        'proId':produuid,
-        'maincatag':maincatagValue,
-        'subcateg':mainsubvalue,
-        'price':price,
-        'instock':Quantity,
-        'proname': product_name,
-        'prodesc':description,
-        'sid':FirebaseAuth.instance.currentUser!.uid,
+          'proimages':imagesUrlList,
 
-        'proimages':imagesUrlList,
-        'discount':0,
+          'proId':produuid,
+          'maincatag':maincatagValue,
+          'subcateg':mainsubvalue,
+          'price':price,
+          'instock':Quantity,
+          'proname': product_name,
+          'prodesc':description,
+          'sid':FirebaseAuth.instance.currentUser!.uid,
 
+          'proimages':imagesUrlList,
+          'discount':0,
       }).whenComplete(() {
         setState(() {
           prograces=false;
@@ -145,7 +144,7 @@ class _ProjectAddState extends State<ProjectAdd> {
             'your form is sucessfully submit ',
             style: TextStyle(color: Colors.black),
           ),
-          duration: Duration(seconds: 8),
+          duration: Duration(seconds: 10),
           backgroundColor: Colors.yellow,
         ));
       }
@@ -191,6 +190,7 @@ class _ProjectAddState extends State<ProjectAdd> {
             return Image.file(File(imagesFileList![index].path));
           });
     } else {
+
       return const Center(
           child: const Center(
         child: Text(
@@ -418,7 +418,7 @@ class _ProjectAddState extends State<ProjectAdd> {
             Padding(
               padding: EdgeInsets.only(right: 10),
               child: FloatingActionButton(
-                onPressed: imagesFileList!.isEmpty
+                onPressed:  imagesFileList!.isEmpty
                     ? () {
                         pickProductImages();
                       }

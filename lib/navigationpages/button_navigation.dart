@@ -6,6 +6,7 @@ import '../pagelogin/add_project.dart';
 import '../pagelogin/add_skill.dart';
 import '../pagelogin/homepage.dart';
 
+
 class ButtonNavigation extends StatefulWidget {
    ButtonNavigation({Key? key}) : super(key: key);
 
@@ -16,7 +17,7 @@ class ButtonNavigation extends StatefulWidget {
 class _ButtonNavigationState extends State<ButtonNavigation> {
   List pages=[
     Homepage(),
-   ProjectAdd(),
+    ProjectAdd(),
     AddSkill(),
 
   ];
@@ -33,6 +34,7 @@ class _ButtonNavigationState extends State<ButtonNavigation> {
     return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
 
         onTap: onTap,
         currentIndex: currentIndex,
@@ -48,13 +50,14 @@ class _ButtonNavigationState extends State<ButtonNavigation> {
             label: 'Home',
           ),
 
-          BottomNavigationBarItem(icon: Icon(Icons.circle,size: 60,),
+
+          BottomNavigationBarItem(icon: Icon(Icons.circle,size: 45,),
             label: 'AddProject',
 
 
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.school),
-            label: 'School',
+          BottomNavigationBarItem(icon: Icon(Icons.search),
+            label: 'Search',
           ),
         ],
 

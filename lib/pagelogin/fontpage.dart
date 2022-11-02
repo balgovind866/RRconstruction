@@ -1,11 +1,8 @@
-
-import 'package:chat_apps3/pagelogin/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '../navigationpages/button_navigation.dart';
 import '../signpage/phoneverficationpage.dart';
 
@@ -76,7 +73,6 @@ class _FrontPageState extends State<FrontPage> {
           ),
           ),
           Text('RAJA RAM',
-
             style: TextStyle(
               decoration: TextDecoration.none,
             fontSize: 40.sp,
@@ -90,13 +86,12 @@ class _FrontPageState extends State<FrontPage> {
           ),),
           SizedBox(height: 190.h),
           Padding(padding: EdgeInsets.symmetric(horizontal:31.w,),
-              child: ElevatedButton(onPressed: () {
+              child: ElevatedButton(onPressed: ()
+              {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) =>  phoneverfication()),) ;
-
-
-              }, child:
+                }, child:
               
                  Row(
                    children: [
