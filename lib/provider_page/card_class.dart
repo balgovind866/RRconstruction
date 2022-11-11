@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 
 class Product{
-  String? name;
+  String? name='';
   double? price;
   int? qty=1;
   int? qntty;
@@ -31,7 +31,7 @@ class Cart extends ChangeNotifier {
     _list.length;
   }
 
-  void addItem(String? name,
+  void addItem(String name,
       double? price,
       int? qty,
       int? qntty,

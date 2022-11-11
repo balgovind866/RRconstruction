@@ -3,9 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../mainCatagary/product_item.dart';
+import '../miner_screan/CardScrean.dart';
 import '../miner_screan/FullScreanProduct.dart';
+import '../provider_page/card_class.dart';
 
 class ProductDetailscrean extends StatefulWidget {
   final dynamic proList;
@@ -218,9 +221,22 @@ class _ProductDetailscreanState extends State<ProductDetailscrean> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(onPressed: (){}, icon: Icon(Icons.countertops)),
-            IconButton(onPressed: (){}, icon: Icon(Icons.shopping_cart)),
+            IconButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>CardScrean()));
+            }, icon: Icon(Icons.shopping_cart)),
             ElevatedButton(
-              onPressed: (){},
+              onPressed: (){
+                context.read<Cart>().addItem(
+                    widget.proList['maincatag'],
+                    widget.proList['price'],
+                    1,
+
+                    widget.proList['instock'],
+                    imageList,
+                    widget.proList['proId'],
+                    widget.proList['sid'],
+                );
+              },
                 child: Text('add project',),
 
 

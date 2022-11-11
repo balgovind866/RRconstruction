@@ -27,7 +27,7 @@ class _FullScreanProductState extends State<FullScreanProduct> {
       body: Column(
 
         children: [
-          Text('${index!+1} / ${widget.imageList.length}',style: TextStyle(
+          Text('${index+1} / ${widget.imageList.length}',style: TextStyle(
             fontSize: 20,
           ),),
           SizedBox(
