@@ -2,20 +2,18 @@ import 'package:chat_apps3/mainCatagary/product_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class Man_page extends StatefulWidget {
-  const Man_page({Key? key}) : super(key: key);
+class TileSetter extends StatefulWidget {
+  const TileSetter({Key? key}) : super(key: key);
 
   @override
-  State<Man_page> createState() => _Man_pageState();
+  State<TileSetter> createState() => _TileSetterState();
 }
 
-class _Man_pageState extends State<Man_page> {
+class _TileSetterState extends State<TileSetter> {
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
       .collection('products')
-      .where('maincatag', isEqualTo: 'men')
+      .where('maincatag', isEqualTo: 'Tile_setter')
       .snapshots();
 
   @override
@@ -31,7 +29,7 @@ class _Man_pageState extends State<Man_page> {
           return CircularProgressIndicator();
         }
         if (snapshot.data!.docs.isEmpty) {
-          return Center(
+          return const Center(
             child: Text(
               'this catagory \n\n as no item yet !',
               style: TextStyle(
@@ -47,7 +45,7 @@ class _Man_pageState extends State<Man_page> {
           padding: EdgeInsets.all(12),
           child: GridView.builder(
               itemCount: snapshot.data!.docs.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 24,
@@ -73,5 +71,3 @@ class _Man_pageState extends State<Man_page> {
     );
   }
 }
-
-

@@ -3,14 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-import '../mainCatagary/all_maincatagary.dart';
-import '../mainCatagary/man.dart';
-import '../mainCatagary/shoes_pages.dart';
-import '../mainCatagary/woman_paga.dart';
-import 'add_project.dart';
-import 'add_skill.dart';
-import 'homePage_component/MenuPage.dart';
+import '../../mainCatagary/Tile_Setter_page.dart';
+import '../../mainCatagary/shoes_pages.dart';
+import '../../mainCatagary/woman_paga.dart';
+import '../../searchScreen.dart';
+import '../title_search_page.dart';
+import 'MenuPage.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -29,7 +27,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 8, vsync: this);
+    _tabController = TabController(length: 11, vsync: this);
 
     _controller = AnimationController(
       vsync: this,
@@ -63,7 +61,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
       backgroundColor: Color(0xff514949),
       body: Stack(
         children: <Widget>[
-          MenuPage(_slideAnimation),
+          MenuPage(_slideAnimation,context),
           dashbord(context),
         ],
       ),
@@ -74,7 +72,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   int currentIndex = 0;
 
   List pages = [
-    Man_page(),
+    TileSetter(),
     WomanPage(),
     ShowesPage(),
   ];
@@ -94,7 +92,6 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
       child: ScaleTransition(
           scale: _scaleAnimation!,
           child: Material(
-            borderRadius: BorderRadius.all(Radius.circular(40)),
             elevation: 8,
             color: Color(0xff514949),
             //it is use for appb
@@ -103,7 +100,15 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 backgroundColor: Colors.white54,
                 appBar: AppBar(
                   backgroundColor: Colors.white,
-                  title: CupertinoSearchTextField(),
+                  title:
+                  InkWell(
+                      onTap:(){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchScrean()));
+                  },
+
+                  child:
+                  searchbar( text: 'search hear',)
+                  ),
                   leading: InkWell(
                     hoverColor: Color(0xff48D1EF),
                     child: Icon(
@@ -135,29 +140,39 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     controller: _tabController,
                     tabs: [
                       RepeatedTab(
-                        label: 'man',
+                        label: 'Tile_setter',
                       ),
                       RepeatedTab(
-                        label: 'woman',
+                        label: 'Brick_mason',
                       ),
                       RepeatedTab(
-                        label: 'shoes',
+                        label: 'carpenter',
                       ),
                       RepeatedTab(
-                        label: 'woman',
+                        label: 'Plumber',
                       ),
                       RepeatedTab(
-                        label: 'woman',
+                        label: 'Painter',
                       ),
                       RepeatedTab(
-                        label: 'woman',
+                        label: 'Electrician',
                       ),
                       RepeatedTab(
-                        label: 'woman',
+                        label: 'Pipefitter',
                       ),
                       RepeatedTab(
-                        label: 'woman',
+                        label: 'Safety',
                       ),
+                      RepeatedTab(
+                        label: 'Construction',
+                      ),
+                      RepeatedTab(
+                        label: 'civil engineer',
+                      ),
+                      RepeatedTab(
+                        label: 'welding work',
+                      ),
+
                     ],
                   ),
                 ),
@@ -183,3 +198,15 @@ class RepeatedTab extends StatelessWidget {
     );
   }
 }
+/*'Tile_setter'
+'Brick_mason'
+'carpenter'
+'Plumber'
+'Painter'
+'Electrician'
+'Pipefitter'
+'Safety'
+'Construction'
+'Construction'
+'civil engineer'
+'welding work'*/

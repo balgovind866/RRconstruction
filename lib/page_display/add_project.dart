@@ -23,24 +23,34 @@ class _ProjectAddState extends State<ProjectAdd> {
 
   double? price = 0.0;
   int? Quantity = 0;
+  String? dropdownValue=' ';
   String? product_name = '';
   String? description = '';
   String? produuid;
   bool prograces=false;
   List<String> catag=[
     'catagory',
-    'men',
-    'woman',
-    'shoes',
-    'bags',
 
+        'Tile_setter',
+        'Brick_mason',
+        'carpenter',
+        'Plumber',
+        'Painter',
+        'Electrician',
+        'Pipefitter',
+        'Safety',
+        'Construction',
+        'Construction',
+        'civil engineer',
+        'welding work',
   ];
-  List<String> catagMan=[
+  List<String> catagTile_setter=[
     'subcategory',
-    'shrit',
-    'jacket',
-    'jeans',
-    'pant',
+    'Labor',
+    'Thikedar',
+    'mistari',
+    'machine_work',
+    'others',
 
   ];
   List<String> catagWoman=[
@@ -61,6 +71,14 @@ class _ProjectAddState extends State<ProjectAdd> {
   ];
   List<String> catagbags=[
     'subcategory',
+    'b shrit',
+    'b jacket',
+    'b jeans',
+    'b pant',
+
+  ];
+  List<String> monthlist=[
+    'substing',
     'b shrit',
     'b jacket',
     'b jeans',
@@ -164,7 +182,10 @@ class _ProjectAddState extends State<ProjectAdd> {
 
   final ImagePicker _picker = ImagePicker();
   List<XFile>? imagesFileList = [];
-  List<String>? imagesUrlList=[];
+
+  List<String>? imagesUrlList=[
+
+  ];
   dynamic _pickedImageError;
 
   void pickProductImages() async {
@@ -182,7 +203,7 @@ class _ProjectAddState extends State<ProjectAdd> {
     }
   }
 
-  Widget previewImages() {
+  Widget previewImages(){
     if (imagesFileList!.isNotEmpty) {
       return ListView.builder(
           itemCount: imagesFileList!.length,
@@ -194,7 +215,7 @@ class _ProjectAddState extends State<ProjectAdd> {
       return const Center(
           child: const Center(
         child: Text(
-          'you have not \n\n picked image yet ! ',
+          ' if you have\n\n post image here!\n\n it is not mandetary ',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 16),
         ),
@@ -207,9 +228,14 @@ class _ProjectAddState extends State<ProjectAdd> {
     var size= MediaQuery.of(context).size;
     return ScaffoldMessenger(
       key: _scafoldkey,
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            title: Text('Contect here:-8318520053',style: TextStyle(color:
+            Colors.black),),
+          ),
+          body: SingleChildScrollView(
             reverse: true,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Form(
@@ -229,7 +255,7 @@ class _ProjectAddState extends State<ProjectAdd> {
                               ? previewImages()
                               : const Center(
                                   child: Text(
-                                    'you have not \n\n picked image yet ! ',
+                                    'if have image  \n\n picked here image !\n\n it is not mandatary',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(fontSize: 16),
                                   ),
@@ -257,10 +283,10 @@ class _ProjectAddState extends State<ProjectAdd> {
                                       value: value,
                                     );
                                   }).toList(), onChanged: (String? value){
-                                if(value=='men')
+                                if(value=='Tile_setter')
                                 {
-                                  subCategList=catagMan;
-                                }else if(value=='woman')
+                                  subCategList=catagTile_setter;
+                                }else if(value=='Brick_mason')
                                 {
                                   subCategList=catagWoman;
                                 }
@@ -329,7 +355,7 @@ class _ProjectAddState extends State<ProjectAdd> {
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "pleas enter price";
+                            return "Enter the project cost";
                           } else if (value.isValidQuantity() != true) {
                             return 'not valid quantity';
                           } else {
@@ -342,7 +368,7 @@ class _ProjectAddState extends State<ProjectAdd> {
                         keyboardType:
                             TextInputType.numberWithOptions(decimal: true),
                         decoration: textFormDecoration.copyWith(
-                          labelText: 'price ',
+                          labelText: 'projct cost ',
                           hintText: 'price...\$',
                         ),
                       ),
@@ -355,9 +381,9 @@ class _ProjectAddState extends State<ProjectAdd> {
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "pleas enter quantity";
+                            return " submation of time";
                           } else if (value.isValidQuantity() != true) {
-                            return 'not valid quantity';
+                            return 'not valid time';
                           } else {
                             return null;
                           }
@@ -367,12 +393,13 @@ class _ProjectAddState extends State<ProjectAdd> {
                         },
                         keyboardType: TextInputType.number,
                         decoration: textFormDecoration.copyWith(
-                          labelText: 'Quantity',
+                          labelText: 'submation date',
                           hintText: 'Aad quantity',
                         ),
                       ),
                     ),
                   ),
+
                   Padding(
                     padding: EdgeInsets.all(8),
                     child: SizedBox(
@@ -411,47 +438,47 @@ class _ProjectAddState extends State<ProjectAdd> {
               ),
             ),
           ),
-        ),
-        floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: FloatingActionButton(
-                onPressed:  imagesFileList!.isEmpty
-                    ? () {
-                        pickProductImages();
-                      }
-                    : () {
-                        setState(() {
-                          imagesFileList = [];
-                        });
-                      },
-                backgroundColor: Colors.yellow,
+          floatingActionButton: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: FloatingActionButton(
+                  onPressed:  imagesFileList!.isEmpty
+                      ? () {
+                          pickProductImages();
+                        }
+                      : () {
+                          setState(() {
+                            imagesFileList = [];
+                          });
+                        },
+                  backgroundColor: Colors.yellow,
 
-                child: imagesFileList!.isEmpty
-                    ? Icon(
-                        Icons.photo_library,
-                        color: Colors.black,
-                      )
-                    : Icon(
-                        Icons.delete_forever,
-                        color: Colors.black,
-                      ),
+                  child: imagesFileList!.isEmpty
+                      ? Icon(
+                          Icons.photo_library,
+                          color: Colors.black,
+                        )
+                      : Icon(
+                          Icons.delete_forever,
+                          color: Colors.black,
+                        ),
+                ),
               ),
-            ),
-            FloatingActionButton(
-              onPressed:  uploadproduct,
-              backgroundColor: Colors.yellow,
-              child:prograces==true? CircularProgressIndicator(
-                color: Colors.black,
-              )
-              : Icon(
-                Icons.upload,
-                color: Colors.black,
+              FloatingActionButton(
+                onPressed:  uploadproduct,
+                backgroundColor: Colors.yellow,
+                child:prograces==true? CircularProgressIndicator(
+                  color: Colors.black,
+                )
+                : Icon(
+                  Icons.upload,
+                  color: Colors.black,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

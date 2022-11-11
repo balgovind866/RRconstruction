@@ -2,8 +2,7 @@ import 'package:chat_apps3/mainCatagary/product_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 
 class WomanPage extends StatefulWidget {
   const WomanPage({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class WomanPage extends StatefulWidget {
 class _WomanPageState extends State<WomanPage> {
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
       .collection('products')
-      .where('maincatag', isEqualTo: 'woman')
+      .where('maincatag', isEqualTo: 'Brick_mason')
       .snapshots();
 
   @override

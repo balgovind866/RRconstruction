@@ -1,10 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../pagelogin/add_project.dart';
-import '../pagelogin/add_skill.dart';
-import '../pagelogin/homepage.dart';
+import '../page_display/add_project.dart';
+import '../page_display/homePage_component/homepage.dart';
+import '../page_display/search_categary.dart';
 
 
 class ButtonNavigation extends StatefulWidget {
@@ -18,7 +17,7 @@ class _ButtonNavigationState extends State<ButtonNavigation> {
   List pages=[
     Homepage(),
     ProjectAdd(),
-    AddSkill(),
+    SearchCategary(),
 
   ];
   int currentIndex=0;

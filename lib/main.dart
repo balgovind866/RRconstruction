@@ -1,6 +1,7 @@
 
 
-import 'package:chat_apps3/pagelogin/fontpage.dart';
+import 'package:chat_apps3/page_display/SplashScrean_page.dart';
+import 'package:chat_apps3/page_display/homePage_component/fontpage.dart';
 import 'package:chat_apps3/signpage/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,7 +23,7 @@ class ChatApp extends StatelessWidget {
               theme: ThemeData(
                 primaryColor: Colors.indigo,
               ),
-              home: FrontPage(),
+              home: SplashScrean(),
             ),
         designSize: const Size(390, 844),
       );

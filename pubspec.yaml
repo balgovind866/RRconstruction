@@ -41,6 +41,12 @@ dependencies:
   firebase_storage: ^10.3.5
   uuid: ^3.0.6
   flutter_staggered_grid_view: ^0.5.1
+  animated_splash_screen: ^1.2.0
+  lottie: ^1.4.3
+  card_swiper: ^2.0.3
+  provider: ^6.0.4
+
+
 
 
 
@@ -86,6 +92,13 @@ flutter:
       - 1666267752454.ico
       - phone.png
       - pngegg.png
+      - 125957-nice-loading.json
+      - 0205090001-3-Tiles-Installation-Work-Workmanship-shutterstock_411857641.jpeg
+      - download.jpeg
+      - hqdefault.jpeg
+      - images.jpeg
+      - Screenshot from 2022-06-27 16-30-26.webp
+      - BV-Acharya-13.jpeg
 
 
 

@@ -3,23 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../navigationpages/button_navigation.dart';
-import '../signpage/phoneverficationpage.dart';
+import '../../navigationpages/button_navigation.dart';
+import '../../signpage/phoneverficationpage.dart';
 
 
 class FrontPage extends StatefulWidget {
    FrontPage({Key? key}) : super(key: key);
-
-
 
   @override
   State<FrontPage> createState() => _FrontPageState();
 }
 
 class _FrontPageState extends State<FrontPage> {
-
-
-
   final _firebaseAuth = FirebaseAuth.instance;
   Future<User> signInWithGoogle() async{
     final googleSignIn=GoogleSignIn();
