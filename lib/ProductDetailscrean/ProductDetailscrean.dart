@@ -9,6 +9,7 @@ import '../mainCatagary/product_item.dart';
 import '../miner_screan/CardScrean.dart';
 import '../miner_screan/FullScreanProduct.dart';
 import '../provider_page/card_class.dart';
+import 'package:collection/collection.dart';
 
 class ProductDetailscrean extends StatefulWidget {
   final dynamic proList;
@@ -24,6 +25,7 @@ class _ProductDetailscreanState extends State<ProductDetailscrean> {
 
   late List<dynamic> imageList=widget.proList['proimages'];
 
+  final GlobalKey<ScaffoldMessengerState> _scaffoldKey = new GlobalKey<ScaffoldMessengerState>();
 
 
   @override
@@ -33,227 +35,247 @@ class _ProductDetailscreanState extends State<ProductDetailscrean> {
         .where('maincatag', isEqualTo: widget.proList['maincatag']).where('subcateg',isEqualTo: widget.proList['subcateg'])
         .snapshots();
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Padding(
-          padding: EdgeInsets.all(10),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
+      child: ScaffoldMessenger(
+        key:_scaffoldKey,
 
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Padding(
+            padding: EdgeInsets.all(10),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
 
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>FullScreanProduct( imageList: imageList,)));
-                    },
-                    child: Stack(
-                      children: [
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
 
-                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.45,
-                        child: Container(
-                          color: Colors.grey,
-                          child: Swiper(
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>FullScreanProduct( imageList: imageList,)));
+                      },
+                      child: Stack(
+                        children: [
 
-                            itemCount: imageList.length,
-                            pagination:
-                                SwiperPagination(builder: SwiperPagination.dots,),
-                            itemBuilder: (context, index) {
-                              return Image(
-                                image:NetworkImage(imageList[index]));
+                         SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.45,
+                          child: Container(
+                            color: Colors.grey,
+                            child: Swiper(
 
-                            },
+                              itemCount: imageList.length,
+                              pagination:
+                                  SwiperPagination(builder: SwiperPagination.dots,),
+                              itemBuilder: (context, index) {
+                                return Image(
+                                  image:NetworkImage(imageList[index]));
+
+                              },
+                            ),
                           ),
                         ),
+                          Positioned(
+                            left: 10,
+                            top: 10,
+                            child:  CircleAvatar(
+                              backgroundColor: Colors.yellow.shade300,
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(
+                                  Icons.arrow_back_ios_new,
+                                  color: Colors.black,
+                                  size: 15,
+                                ),
+                              ),
+                            ),
+
+                          ),
+                          Positioned(
+                            right: 10,
+                            top: 10,
+                            child:  CircleAvatar(
+                              backgroundColor: Colors.yellow.shade300,
+                              child: IconButton(
+                                onPressed: () {
+
+                                },
+                                icon: Icon(
+                                  Icons.share,
+                                  color: Colors.black,
+                                  size: 15,
+                                ),
+                              ),
+                            ),
+
+                          ),
+                        ],
                       ),
-                        Positioned(
-                          left: 10,
-                          top: 10,
-                          child:  CircleAvatar(
-                            backgroundColor: Colors.yellow.shade300,
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(
-                                Icons.arrow_back_ios_new,
-                                color: Colors.black,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-
+                    ),
+                    SizedBox(height: 5.h,),
+                    test(
+                      testvalue: widget.proList['maincatag'],
+                      colors: Colors.grey,
+                      size: 40,
+                    ),
+                    SizedBox(height: 5.h,),
+                    test(
+                      testvalue:('yeh work ye log kar sakate hai :--')+ widget.proList['subcateg'],
+                      colors: Colors.grey,
+                    ),
+                    SizedBox(height: 5.h,),
+                    test(
+                      testvalue:('submit data of project:-')+ widget.proList['instock'].toString()+('  Month'),
+                      colors: Colors.grey,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        test(
+                          testvalue:('lagbhag Price  :--')+ ('\₹')+widget.proList['price'].toStringAsFixed(2) ,
+                          colors: Colors.red,
+                          size: 19.sp,
                         ),
-                        Positioned(
-                          right: 10,
-                          top: 10,
-                          child:  CircleAvatar(
-                            backgroundColor: Colors.yellow.shade300,
-                            child: IconButton(
-                              onPressed: () {
-
-                              },
-                              icon: Icon(
-                                Icons.share,
-                                color: Colors.black,
-                                size: 15,
-                              ),
-                            ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.favorite_border_outlined,
+                            size: 30,
                           ),
-
+                          color: Colors.red,
                         ),
                       ],
                     ),
-                  ),
-                  SizedBox(height: 5.h,),
-                  test(
-                    testvalue: widget.proList['maincatag'],
-                    colors: Colors.grey,
-                    size: 40,
-                  ),
-                  SizedBox(height: 5.h,),
-                  test(
-                    testvalue:('yeh work ye log kar sakate hai :--')+ widget.proList['subcateg'],
-                    colors: Colors.grey,
-                  ),
-                  SizedBox(height: 5.h,),
-                  test(
-                    testvalue:('submit data of project:-')+ widget.proList['instock'].toString()+('  Month'),
-                    colors: Colors.grey,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      test(
-                        testvalue:('lagbhag Price  :--')+ ('\₹')+widget.proList['price'].toStringAsFixed(2) ,
-                        colors: Colors.red,
-                        size: 19.sp,
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.favorite_border_outlined,
-                          size: 30,
-                        ),
-                        color: Colors.red,
-                      ),
-                    ],
-                  ),
 
-                  test(
-                   testvalue: widget.proList['proname'],
+                    test(
+                     testvalue: widget.proList['proname'],
 
-                    colors: Colors.grey,
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  divider(
-                    Description: 'project Description',
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  test(
-                      testvalue:
-                      widget.proList['prodesc'],
-                      colors: Colors.grey),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  divider(
-                    Description: 'related project',
-                  ),
-                  SizedBox(child: StreamBuilder<QuerySnapshot>(
-                              stream: _usersStream,
-                          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                            if (snapshot.hasError) {
-                              return Text('Something went wrong');
-                            }
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return CircularProgressIndicator();
-                            }
-                            if (snapshot.data!.docs.isEmpty) {
-                              return const Center(
-                                child: Text(
-                                  'this catagory \n\n as no item yet !',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                      colors: Colors.grey,
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    divider(
+                      Description: 'project Description',
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    test(
+                        testvalue:
+                        widget.proList['prodesc'],
+                        colors: Colors.grey),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    divider(
+                      Description: 'related project',
+                    ),
+                    SizedBox(child: StreamBuilder<QuerySnapshot>(
+                                stream: _usersStream,
+                            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.hasError) {
+                                return Text('Something went wrong');
+                              }
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              }
+                              if (snapshot.data!.docs.isEmpty) {
+                                return const Center(
+                                  child: Text(
+                                    'this catagory \n\n as no item yet !',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
+                                );
+                              }
+                              return Padding(
+                                padding: EdgeInsets.all(12),
+                                child: GridView.builder(
+                                    shrinkWrap: true,
+                                    physics: ScrollPhysics(),
+
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: snapshot.data!.docs.length,
+                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 1,
+                                      crossAxisSpacing: 20,
+                                      mainAxisSpacing: 24,
+                                    ),
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return Productitem(
+                                        product: snapshot.data!.docs[index],
+                                      );
+                                    }),
                               );
                             }
-                            return Padding(
-                              padding: EdgeInsets.all(12),
-                              child: GridView.builder(
-                                  shrinkWrap: true,
-                                  physics: ScrollPhysics(),
+                            ),
+                    ),
+                  ],
+                ),
+              ),
 
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: snapshot.data!.docs.length,
-                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 1,
-                                    crossAxisSpacing: 20,
-                                    mainAxisSpacing: 24,
-                                  ),
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return Productitem(
-                                      product: snapshot.data!.docs[index],
-                                    );
-                                  }),
-                            );
-                          }
-                          ),
-                  ),
+            ),
+          ),
+          bottomSheet: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  IconButton(onPressed: (){}, icon: Icon(Icons.countertops)),
+              IconButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>CardScrean()));
+              }, icon: Icon(Icons.shopping_cart))
+
                 ],
               ),
-            ),
+              ElevatedButton(
+                onPressed: (){
+                  context.read<Cart>().getItems.firstWhereOrNull(
+                          (product) => product.documentID==widget.proList['proId'])!=null?
+                  _scaffoldKey.currentState?.showSnackBar(SnackBar(
+                    content: Text(
+                      'you are all ready add project ',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    duration: Duration(seconds: 10),
+                    backgroundColor: Colors.yellow,
+                  )):
+                  
+                  context.read<Cart>().addItem(
+                      widget.proList['maincatag'],
+                      widget.proList['price'],
+                      1,
 
-          ),
-        ),
-        bottomSheet: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(onPressed: (){}, icon: Icon(Icons.countertops)),
-            IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>CardScrean()));
-            }, icon: Icon(Icons.shopping_cart)),
-            ElevatedButton(
-              onPressed: (){
-                context.read<Cart>().addItem(
-                    widget.proList['maincatag'],
-                    widget.proList['price'],
-                    1,
-
-                    widget.proList['instock'],
-                    imageList,
-                    widget.proList['proId'],
-                    widget.proList['sid'],
-                );
-              },
-                child: Text('add project',),
+                      widget.proList['instock'],
+                      imageList,
+                      widget.proList['proId'],
+                      widget.proList['sid'],
+                  );
+                },
+                  child: Text('add project',),
 
 
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.symmetric(horizontal: 40,vertical: 8),),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow.shade300),
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.black),
-                        
-                      ),
-                  ),
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.symmetric(horizontal: 40,vertical: 8),),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow.shade300),
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.black),
+                          
+                        ),
+                    ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
 

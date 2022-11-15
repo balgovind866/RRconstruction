@@ -1,7 +1,8 @@
 
 
-import 'package:chat_apps3/page_display/SplashScrean_page.dart';
-import 'package:chat_apps3/page_display/homePage_component/fontpage.dart';
+
+import 'package:chat_apps3/page_display/homePage_component/SplashScrean_page.dart';
+
 import 'package:chat_apps3/provider_page/card_class.dart';
 import 'package:chat_apps3/signpage/auth.dart';
 import 'package:firebase_core/firebase_core.dart';

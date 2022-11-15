@@ -3,11 +3,11 @@
 import 'package:flutter/cupertino.dart';
 
 class Product{
-  String? name='';
-  double? price;
-  int? qty=1;
-  int? qntty;
-  List? imgagesUrl;
+  String? name;
+  double price;
+  int qty=1;
+  int qntty;
+  List? imgagesUrl=[];
   String documentID;
   String suppId;
   Product({
@@ -19,22 +19,34 @@ class Product{
     required this.documentID,
     required this.suppId,
 });
+   void increas()
+   {
+    qty++;
+  }
+  void decreas()
+  {
+     qty--;
+  }
+
+
 }
 class Cart extends ChangeNotifier {
   final List<Product> _list = [];
 
-  List<Product> get getItems {
+  List<Product> get getItems
+  {
     return _list;
   }
 
-  int? get count {
-    _list.length;
-  }
+   int get count
+   {
+   return _list.length;
+   }
 
   void addItem(String name,
-      double? price,
-      int? qty,
-      int? qntty,
+      double price,
+      int qty,
+      int qntty,
       List? imgagesUrl,
       String documentID,
       String suppId,) {
@@ -50,4 +62,22 @@ class Cart extends ChangeNotifier {
     _list.add(product);
     notifyListeners();
   }
+  void increment(Product product){
+    product.increas();
+    notifyListeners();
+  }
+  void decrement(Product product){
+    product.decreas();
+    notifyListeners();
+
+  }
+  void removed(Product product){
+    _list.remove(product);
+    notifyListeners();
+  }
+  void clearCart(){
+    _list.clear();
+    notifyListeners();
+  }
+
 }
