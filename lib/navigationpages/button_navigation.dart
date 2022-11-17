@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../Location_page/Location_wise_search/location_of_user.dart';
 import '../page_display/add_project.dart';
 import '../page_display/homePage_component/homepage.dart';
 import '../page_display/search_categary.dart';
@@ -16,9 +17,10 @@ class ButtonNavigation extends StatefulWidget {
 class _ButtonNavigationState extends State<ButtonNavigation> {
   List pages=[
     Homepage(),
-    ProjectAdd(),
     SearchCategary(),
-
+    ProjectAdd(),
+    LocationSearch(),
+    LocationSearch(),
   ];
   int currentIndex=0;
   void onTap(int index){
@@ -44,20 +46,26 @@ class _ButtonNavigationState extends State<ButtonNavigation> {
         unselectedItemColor: Colors.white,
         selectedFontSize: 16,
 
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home),
             label: 'Home',
           ),
 
 
-          BottomNavigationBarItem(icon: Icon(Icons.circle,size: 45,),
-            label: 'AddProject',
 
-
-          ),
           BottomNavigationBarItem(icon: Icon(Icons.search),
             label: 'Search',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.add_circle,size: 40,),
+            label: 'Project',
+
+
+
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.location_on,),
+              label: 'location',),
+              BottomNavigationBarItem(icon: Icon(Icons.person_add_alt,),
+            label: 'user',)
         ],
 
       ),
