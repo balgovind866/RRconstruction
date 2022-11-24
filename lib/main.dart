@@ -1,23 +1,20 @@
-
-
-
 import 'package:chat_apps3/page_display/homePage_component/SplashScrean_page.dart';
-
 import 'package:chat_apps3/provider_page/card_class.dart';
-import 'package:chat_apps3/signpage/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import 'provider_page/SignInprovide_page.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (_)=>Cart())
-
+      ChangeNotifierProvider(create: (_)=>Cart()),
+      ChangeNotifierProvider(create: (_)=>SignInprovide())
     ],
       child: ChatApp()));
 }

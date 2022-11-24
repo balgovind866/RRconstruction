@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../../Location_page/Location_wise_search/location_of_user.dart';
 import '../../mainCatagary/Tile_Setter_page.dart';
 import '../../mainCatagary/shoes_pages.dart';
 import '../../mainCatagary/woman_paga.dart';
@@ -63,6 +64,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
         children: <Widget>[
           MenuPage(_slideAnimation,context),
           dashbord(context),
+
         ],
       ),
     );
@@ -92,7 +94,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
       child: ScaleTransition(
           scale: _scaleAnimation!,
           child: Material(
-            elevation: 8,
+            elevation: 4,
             color: Color(0xff514949),
             //it is use for appb
             child: SafeArea(

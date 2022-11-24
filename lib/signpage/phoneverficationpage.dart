@@ -7,11 +7,12 @@ enum LoginScreen{
   SHOW_OTP_FORM_WIDGET
 }
 
-class phoneverfication extends StatefulWidget {
+class phoneverfication extends StatefulWidget
+{
    phoneverfication({Key? key}) : super(key: key);
-
-  @override
+   @override
   State<phoneverfication> createState() => _phoneverficationState();
+
 }
 class _phoneverficationState extends State<phoneverfication> {
   TextEditingController phoneController = TextEditingController();

@@ -1,11 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import '../../navigationpages/button_navigation.dart';
+import '../../provider_page/SignInprovide_page.dart';
+import '../../provider_page/card_class.dart';
 import '../../signpage/phoneverficationpage.dart';
-
 
 class FrontPage extends StatefulWidget {
    FrontPage({Key? key}) : super(key: key);
@@ -15,34 +15,7 @@ class FrontPage extends StatefulWidget {
 }
 
 class _FrontPageState extends State<FrontPage> {
-  final _firebaseAuth = FirebaseAuth.instance;
-  Future<User> signInWithGoogle() async{
-    final googleSignIn=GoogleSignIn();
-    final googleUser = await googleSignIn.signIn();
-    if(googleUser!=null)
-    {
-      final googleAuth= await googleUser.authentication;
-      if(googleAuth.idToken!=null){
-        final userCredential= await _firebaseAuth.
-        signInWithCredential(GoogleAuthProvider.credential(
-          idToken: googleAuth.idToken,
-          accessToken: googleAuth.accessToken,
-        ));
-        return userCredential.user!;
 
-      }else{
-        throw FirebaseAuthException(code: 'Error missing google to token',
-            message: "missing google Id token"
-        );
-      }
-
-    }else{
-      throw FirebaseAuthException(code:"Erro by user",
-        message: "Sign in aborted by user",
-      );
-    }
-
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -122,7 +95,7 @@ class _FrontPageState extends State<FrontPage> {
           SizedBox(height: 30.h,),
           Padding(padding: EdgeInsets.symmetric(horizontal:31.w,),
             child: ElevatedButton(onPressed: () async {
-               await signInWithGoogle();
+               await handlergooglesing();
                Navigator.push(
                    context,
                    MaterialPageRoute(builder: (context) =>  ButtonNavigation()),) ;
@@ -163,6 +136,11 @@ class _FrontPageState extends State<FrontPage> {
       ),
     );
   }
+  Future handlergooglesing() async {
+    final sp=context.read<SignInprovide>();
+    await sp.signInWithGoogle();
+  }
+
 }
 
 
